@@ -1,0 +1,365 @@
+Users of base game class "Mole":
+		Assets.Scripts.AtmosphereStateEvent.IsValidMoleCounts(Atmosphere, Room) : bool @0600194E
+		Assets.Scripts.Atmospherics.Atmosphere.Combust(Atmosphere.MatterState) : void @06004DC3
+		Assets.Scripts.Atmospherics.Atmosphere.CombustableMix() : float @06004DBF
+		Assets.Scripts.Atmospherics.Atmosphere.FilterGas(Chemistry.GasType, ref GasMixture, ref GasMixture) : bool @06004D6C
+		Assets.Scripts.Atmospherics.Atmosphere.FilterGas(Chemistry.GasType, ref GasMixture, ref GasMixture, Atmosphere, float) : float @06004D6D
+		Assets.Scripts.Atmospherics.Atmosphere.FireLevel() : float @06004DC0
+		Assets.Scripts.Atmospherics.Atmosphere.Init(Grid3, GridController, long) : void @06004D69
+		Assets.Scripts.Atmospherics.Atmosphere.IsCloseToGlobal(float) : bool @06004DB7
+		Assets.Scripts.Atmospherics.Atmosphere.IsCloseToGlobal(float, GasMixture) : bool @06004DB8
+		Assets.Scripts.Atmospherics.Atmosphere.Load(AtmosphereSaveData) : void @06004D9B
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureN2O : float @17000BAE
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureO2 : float @17000BAC
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureVolatiles : float @17000BAD
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureWater : float @17000BB1
+		Assets.Scripts.Atmospherics.Atmosphere.React() : void @06004DC2
+		Assets.Scripts.Atmospherics.Atmosphere.Read(RocketBinaryReader) : void @06004DD4
+		Assets.Scripts.Atmospherics.Atmosphere.WaterHeight : float @17000BB3
+		Assets.Scripts.Atmospherics.Atmosphere.WaterRatio : float @17000BB2
+		Assets.Scripts.Atmospherics.Atmosphere.Write(RocketBinaryWriter, byte) : void @06004DD5
+		Assets.Scripts.Atmospherics.AtmosphereSaveData.AtmosphereSaveData(Atmosphere) : void @06004D53
+		Assets.Scripts.Atmospherics.AtmosphericsManager.DisplayGas(GasMixture, Mole, string) : string @06004DFA
+		Assets.Scripts.Atmospherics.Chemistry..cctor() : void @06004E0A
+		Assets.Scripts.Atmospherics.Chemistry.Gases : List<Mole> @04003E22
+		Assets.Scripts.Atmospherics.GasMixture.Add(Mole) : void @06004E2C
+		Assets.Scripts.Atmospherics.GasMixture.AddGasses(GasMixture) : void @06004E2A
+		Assets.Scripts.Atmospherics.GasMixture.AddLiquids(GasMixture) : void @06004E2B
+		Assets.Scripts.Atmospherics.GasMixture.CarbonDioxide : Mole @04003E29
+		Assets.Scripts.Atmospherics.GasMixture.Cleanup() : void @06004E3F
+		Assets.Scripts.Atmospherics.GasMixture.DivideGasses(float) : void @06004E35
+		Assets.Scripts.Atmospherics.GasMixture.DivideLiquids(float) : void @06004E36
+		Assets.Scripts.Atmospherics.GasMixture.EnergyDirty() : bool @06004E0E
+		Assets.Scripts.Atmospherics.GasMixture.FuelHeatOfCombustion : float @17000BC0
+		Assets.Scripts.Atmospherics.GasMixture.GasMixture(float, float, float, float, float, float, float) : void @06004E10
+		Assets.Scripts.Atmospherics.GasMixture.GasMixture(GasMixture) : void @06004E11
+		Assets.Scripts.Atmospherics.GasMixture.GasMixture(Mole) : void @06004E12
+		Assets.Scripts.Atmospherics.GasMixture.GasQuantitiesDirtied() : byte @06004E0C
+		Assets.Scripts.Atmospherics.GasMixture.GetGasTypeRatio(Chemistry.GasType) : float @06004E33
+		Assets.Scripts.Atmospherics.GasMixture.GetMoleValue(Chemistry.GasType) : Mole @06004E15
+		Assets.Scripts.Atmospherics.GasMixture.HeatCapacity : float @17000BBC
+		Assets.Scripts.Atmospherics.GasMixture.HeatCapacityRatio() : float @06004E16
+		Assets.Scripts.Atmospherics.GasMixture.IsCachable : bool @17000BC7
+		Assets.Scripts.Atmospherics.GasMixture.LerpGasses(GasMixture, float) : void @06004E3B
+		Assets.Scripts.Atmospherics.GasMixture.Nitrogen : Mole @04003E28
+		Assets.Scripts.Atmospherics.GasMixture.NitrousOxide : Mole @04003E2D
+		Assets.Scripts.Atmospherics.GasMixture.Oxygen : Mole @04003E27
+		Assets.Scripts.Atmospherics.GasMixture.Pollutant : Mole @04003E2B
+		Assets.Scripts.Atmospherics.GasMixture.Read(RocketBinaryReader) : void @06004E41
+		Assets.Scripts.Atmospherics.GasMixture.ReadOnlyMoles(GasMixture) : Mole[] @06004E14
+		Assets.Scripts.Atmospherics.GasMixture.Remove(Chemistry.GasType, float) : Mole @06004E39
+		Assets.Scripts.Atmospherics.GasMixture.Remove(float, Atmosphere.MatterState) : GasMixture @06004E38
+		Assets.Scripts.Atmospherics.GasMixture.Remove(GasMixture) : GasMixture @06004E37
+		Assets.Scripts.Atmospherics.GasMixture.RemoveAll(Chemistry.GasType) : Mole @06004E3A
+		Assets.Scripts.Atmospherics.GasMixture.Reset() : void @06004E13
+		Assets.Scripts.Atmospherics.GasMixture.ScaleGasses(float) : void @06004E31
+		Assets.Scripts.Atmospherics.GasMixture.ScaleLiquids(float) : void @06004E32
+		Assets.Scripts.Atmospherics.GasMixture.SetGasses(GasMixture) : void @06004E2E
+		Assets.Scripts.Atmospherics.GasMixture.SetLiquids(GasMixture) : void @06004E2F
+		Assets.Scripts.Atmospherics.GasMixture.SetReadOnly(bool) : void @06004E18
+		Assets.Scripts.Atmospherics.GasMixture.ThermalEfficiency() : float @06004E17
+		Assets.Scripts.Atmospherics.GasMixture.TotalEnergy : float @17000BC1
+		Assets.Scripts.Atmospherics.GasMixture.TotalFuel : float @17000BBF
+		Assets.Scripts.Atmospherics.GasMixture.TotalMoles(Atmosphere.MatterState) : float @06004E20
+		Assets.Scripts.Atmospherics.GasMixture.TotalMolesGassesAndLiquidsTradeCost : float @17000BC5
+		Assets.Scripts.Atmospherics.GasMixture.TotalPollutants : float @17000BBE
+		Assets.Scripts.Atmospherics.GasMixture.TotalToxins : float @17000BBD
+		Assets.Scripts.Atmospherics.GasMixture.UndirtyMoles() : void @06004E0D
+		Assets.Scripts.Atmospherics.GasMixture.UpdateCache() : void @06004E28
+		Assets.Scripts.Atmospherics.GasMixture.Volatiles : Mole @04003E2A
+		Assets.Scripts.Atmospherics.GasMixture.Water : Mole @04003E2C
+		Assets.Scripts.Atmospherics.GasMixture.Write(RocketBinaryWriter) : void @06004E42
+		Assets.Scripts.Inventory.InventoryManager.DebugContentsMethod() : void @06002C89
+		Assets.Scripts.Localization.Language.Load(bool) : void @06005280
+		Assets.Scripts.Localization.ReplaceGases(ref string, bool) : void @06001B70
+		Assets.Scripts.Networking.ServerAdmin.CommandAddTankGas(List<string>, ChatMessage) : void @06002B84
+		Assets.Scripts.Objects.DynamicComposter.<DoFertilizationProcessing>d__47.MoveNext() : bool @0600583E
+		Assets.Scripts.Objects.DynamicComposter.DoProcessing() : void @06002E92
+		Assets.Scripts.Objects.DynamicComposter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06002E9F
+		Assets.Scripts.Objects.DynamicGasCanister.OnAtmosphericsBegin() : void @06002EC0
+		Assets.Scripts.Objects.DynamicGenerator._pollutants : Mole @04002A3A
+		Assets.Scripts.Objects.DynamicScrubber.GetPassiveTooltip(Collider) : PassiveTooltip @06002EF5
+		Assets.Scripts.Objects.Electrical.GasSensor.GasRatio(LogicType) : float @06004536
+		Assets.Scripts.Objects.Electrical.VendingMachineRefrigerated.InitInternalAtmosphere() : void @06004AE0
+		Assets.Scripts.Objects.Entities.Animal.OnLifeCreated(Brain) : void @06003E0C
+		Assets.Scripts.Objects.Entities.Human.CreateLungs() : void @06003E98
+		Assets.Scripts.Objects.Entities.Human.TakeBreath() : void @06003EC0
+		Assets.Scripts.Objects.Entity.TakeBreath() : void @06002FF3
+		Assets.Scripts.Objects.GeyserObject.CalculateGas() : void @0600302E
+		Assets.Scripts.Objects.Items.AtmosAnalyser.OnPreScreenUpdate() : void @0600397F
+		Assets.Scripts.Objects.Items.AtmosAnalyser.SetHash(Mole, ref int, ref GasMixture) : void @06003980
+		Assets.Scripts.Objects.Items.GasCanister.OnAtmosphericsBegin() : void @06003ADD
+		Assets.Scripts.Objects.Items.GasCanister.SpawnGas() : void @06003ADE
+		Assets.Scripts.Objects.Items.Ore.Start() : void @06003C46
+		Assets.Scripts.Objects.Items.Plant.DoPlantBreathOut(float) : float @06003C8C
+		Assets.Scripts.Objects.Items.Plant.DoPlantBreathOutEndothermic(float) : float @06003C8D
+		Assets.Scripts.Objects.Items.Plant.MoleEfficiencyRatio(SpawnGas) : float @06003C89
+		Assets.Scripts.Objects.Items.Plant.TakePlantBreath() : void @06003C8A
+		Assets.Scripts.Objects.Items.Plant.TakePlantDrink() : float @06003C8B
+		Assets.Scripts.Objects.Items.SprayCan.OnUseItem(float, Thing) : bool @06003D2D
+		Assets.Scripts.Objects.Pipes.ElectrolysisMachine.OnAtmosphericTick() : void @06004174
+		Assets.Scripts.Objects.Pipes.Furnace.HandleGasInput() : void @06004183
+		Assets.Scripts.Objects.Pipes.PipeAnalysizer.GasRatio(LogicType) : float @0600428C
+		Assets.Scripts.Objects.Pipes.PipeAnalysizer.GetPassiveTooltip(Collider) : PassiveTooltip @0600428D
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketAutonomous.GetTotalFuelStored() : double @0600371B
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketAutonomous.RemoveFuelFromTank(float) : bool @06003715
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketTank.HasCorrectFuelRatio() : bool @06003761
+		Assets.Scripts.Objects.Thing.GasRatio(LogicType, GasMixture) : float @06003346
+		Assets.Scripts.Objects.Thing.OnFireConsume(Atmosphere, float) : bool @06003444
+		Assets.Scripts.OnAtmosphereRoomEvent.IsValidMoleCounts(Atmosphere) : bool @06001946
+		Assets.Scripts.Serialization.XmlSaveLoad.<LoadWorld>d__201.MoveNext() : void @06005EE4
+		Assets.Scripts.SpawnAtmoEventAction.SpawnAtmoEventAction(List<string>) : void @0600187E
+		Assets.Scripts.SpawnGasSkeleton.GetGasMixture(List<string>, int, int) : GasMixture @0600187D
+		Assets.Scripts.Trading.HandleGasTransfer(GasCanister, ref TradingItemDat) : void @06001D5E
+		Assets.Scripts.TradingItemDat.CreateGasMix(int) : void @06001CDF
+		Assets.Scripts.UI.Stationpedia.GenerateList(string, List<Mole>) : void @06002496
+		Assets.Scripts.UI.Stationpedia.PopulateGases() : void @0600248C
+		Assets.Scripts.UI.Stationpedia.PopulateLists() : void @0600248D
+		HydroponicsPlanter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06000B1E
+		Objects.Electrical.AdvancedComposter.CanDoProcessing() : bool @06001515
+		Objects.Electrical.AdvancedComposter.DoProcessing() : void @06001519
+		Objects.Electrical.AdvancedComposter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06001518
+		Objects.Electrical.AdvancedComposter.SetLogicValue(LogicType, double) : void @0600151E
+		Objects.Electrical.FridgePowered.InitInternalAtmosphere() : void @06001566
+		Objects.SpaceShuttle.ModularRocketActionCollector.<StartCollectingGas>d__7.MoveNext() : bool @06005147
+		Objects.SpaceShuttle.ModularRocketActionCollector.GetRandomGasType() : Mole @06001447
+		Objects.SpaceShuttle.ModularRocketActionCollectorGas.GetRandomGasType() : Mole @06001449
+		Objects.SpaceShuttle.ModularRocketActionCollectorLiquid.GetRandomGasType() : Mole @0600144C
+		WorldSetting.GlobalGasMixture : GasMixture @17000285
+
+Users of base game class "GasMixture":
+		Assets.Scripts.AddGasesAndLiquidsActionEvent.AddGasesAndLiquidsActionEvent(List<string>) : void @0600187F
+		Assets.Scripts.AtmosphereStateEvent.IsValidMoleCounts(Atmosphere, Room) : bool @0600194E
+		Assets.Scripts.AtmosphericEventInstance.AddEnergy() : void @0600175F
+		Assets.Scripts.AtmosphericEventInstance.AddGasMixture() : void @0600175C
+		Assets.Scripts.AtmosphericEventInstance.AtmosphericEventInstance(Atmosphere, GasMixture) : void @0600175A
+		Assets.Scripts.AtmosphericEventInstance.CreateAdd(Atmosphere, GasMixture) : AtmosphericEventInstance @06001759
+		Assets.Scripts.AtmosphericEventInstance.CreateRemove(Atmosphere, GasMixture) : AtmosphericEventInstance @06001758
+		Assets.Scripts.AtmosphericEventInstance.CreateSet(Atmosphere, GasMixture) : AtmosphericEventInstance @06001757
+		Assets.Scripts.AtmosphericEventInstance.GasMixture : GasMixture @040016C6
+		Assets.Scripts.AtmosphericEventInstance.RemoveEnergy() : void @06001760
+		Assets.Scripts.AtmosphericEventInstance.RemoveGasMixture() : void @0600175D
+		Assets.Scripts.AtmosphericEventInstance.SetGasMixture() : void @0600175E
+		Assets.Scripts.Atmospherics.Atmosphere..cctor() : void @06004DD7
+		Assets.Scripts.Atmospherics.Atmosphere.Add(GasMixture) : void @06004D9C
+		Assets.Scripts.Atmospherics.Atmosphere.Add(GasMixture, float) : void @06004D9D
+		Assets.Scripts.Atmospherics.Atmosphere.Atmosphere() : void @06004D65
+		Assets.Scripts.Atmospherics.Atmosphere.Atmosphere(Grid3, GridController, long) : void @06004D68
+		Assets.Scripts.Atmospherics.Atmosphere.Atmosphere(PipeNetwork, long) : void @06004D66
+		Assets.Scripts.Atmospherics.Atmosphere.Atmosphere(Thing, float, long) : void @06004D67
+		Assets.Scripts.Atmospherics.Atmosphere.Cleanup() : void @06004DC1
+		Assets.Scripts.Atmospherics.Atmosphere.Combust(Atmosphere.MatterState) : void @06004DC3
+		Assets.Scripts.Atmospherics.Atmosphere.CombustableMix() : float @06004DBF
+		Assets.Scripts.Atmospherics.Atmosphere.DoThermodynamics(Atmosphere, Atmosphere, float, Grid3) : void @06004DD1
+		Assets.Scripts.Atmospherics.Atmosphere.EqualizeBothWays(Atmosphere, Atmosphere, float, float, float) : void @06004D6F
+		Assets.Scripts.Atmospherics.Atmosphere.FilterGas(Chemistry.GasType, ref GasMixture, ref GasMixture) : bool @06004D6C
+		Assets.Scripts.Atmospherics.Atmosphere.FilterGas(Chemistry.GasType, ref GasMixture, ref GasMixture, Atmosphere, float) : float @06004D6D
+		Assets.Scripts.Atmospherics.Atmosphere.FireLevel() : float @06004DC0
+		Assets.Scripts.Atmospherics.Atmosphere.GasMixture : GasMixture @04003DA1
+		Assets.Scripts.Atmospherics.Atmosphere.GasMixtureTemporary : GasMixture @04003DB3
+		Assets.Scripts.Atmospherics.Atmosphere.GetGasTypeRatio(Chemistry.GasType) : float @06004DCC
+		Assets.Scripts.Atmospherics.Atmosphere.GiveAtmospherePortion(Atmosphere) : void @06004DB3
+		Assets.Scripts.Atmospherics.Atmosphere.Init(Grid3, GridController, long) : void @06004D69
+		Assets.Scripts.Atmospherics.Atmosphere.IsActive() : bool @06004D7D
+		Assets.Scripts.Atmospherics.Atmosphere.IsCachable : bool @17000BB9
+		Assets.Scripts.Atmospherics.Atmosphere.IsCloseToGlobal(float) : bool @06004DB7
+		Assets.Scripts.Atmospherics.Atmosphere.IsCloseToGlobal(float, GasMixture) : bool @06004DB8
+		Assets.Scripts.Atmospherics.Atmosphere.IsValid() : bool @06004D7C
+		Assets.Scripts.Atmospherics.Atmosphere.LerpAtmosphere(Atmosphere) : void @06004DB9
+		Assets.Scripts.Atmospherics.Atmosphere.Load(AtmosphereSaveData) : void @06004D9B
+		Assets.Scripts.Atmospherics.Atmosphere.Mix() : void @06004DAE
+		Assets.Scripts.Atmospherics.Atmosphere.Mix(Atmosphere, Atmosphere) : void @06004D6A
+		Assets.Scripts.Atmospherics.Atmosphere.Mix(Atmosphere, Atmosphere, Atmosphere.MatterState) : void @06004D6B
+		Assets.Scripts.Atmospherics.Atmosphere.MixInWorld() : void @06004DBA
+		Assets.Scripts.Atmospherics.Atmosphere.MoveVolume(Atmosphere, Atmosphere, float) : void @06004D6E
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureN2O : float @17000BAE
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureO2 : float @17000BAC
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressurePollutants : float @17000BAF
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureToxins : float @17000BB0
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureVolatiles : float @17000BAD
+		Assets.Scripts.Atmospherics.Atmosphere.ParticalPressureWater : float @17000BB1
+		Assets.Scripts.Atmospherics.Atmosphere.PressureGasses : float @17000BAA
+		Assets.Scripts.Atmospherics.Atmosphere.PressureGassesAndLiquids : float @17000BA8
+		Assets.Scripts.Atmospherics.Atmosphere.PressureLiquids : float @17000BAB
+		Assets.Scripts.Atmospherics.Atmosphere.React() : void @06004DC2
+		Assets.Scripts.Atmospherics.Atmosphere.ReactWithCell() : void @06004DD0
+		Assets.Scripts.Atmospherics.Atmosphere.Read(RocketBinaryReader) : void @06004DD4
+		Assets.Scripts.Atmospherics.Atmosphere.Remove(float) : GasMixture @06004DC5
+		Assets.Scripts.Atmospherics.Atmosphere.Remove(float, Atmosphere.MatterState) : GasMixture @06004DC4
+		Assets.Scripts.Atmospherics.Atmosphere.Remove(GasMixture) : GasMixture @06004DC6
+		Assets.Scripts.Atmospherics.Atmosphere.ResetGasMixing() : void @06004DB6
+		Assets.Scripts.Atmospherics.Atmosphere.SetAtmosphereVolume(Atmosphere, float) : void @06004D70
+		Assets.Scripts.Atmospherics.Atmosphere.ShouldCreateNewWorldAtmos(float) : bool @06004D81
+		Assets.Scripts.Atmospherics.Atmosphere.TakeAtmospherePortion(Atmosphere) : void @06004DB2
+		Assets.Scripts.Atmospherics.Atmosphere.Temperature : float @17000BA2
+		Assets.Scripts.Atmospherics.Atmosphere.TotalMoles : float @17000B9B
+		Assets.Scripts.Atmospherics.Atmosphere.UpdateCache() : void @06004D9A
+		Assets.Scripts.Atmospherics.Atmosphere.UpdateGlobalAtmosphereWorldTemperature() : void @06004D97
+		Assets.Scripts.Atmospherics.Atmosphere.WaterHeight : float @17000BB3
+		Assets.Scripts.Atmospherics.Atmosphere.WaterRatio : float @17000BB2
+		Assets.Scripts.Atmospherics.Atmosphere.Write(RocketBinaryWriter, byte) : void @06004DD5
+		Assets.Scripts.Atmospherics.Atmosphere._gasMixPortion : GasMixture @04003DB7
+		Assets.Scripts.Atmospherics.Atmosphere._overallGasMix : GasMixture @04003DB5
+		Assets.Scripts.Atmospherics.Atmosphere._totalGasMix : GasMixture @04003DB6
+		Assets.Scripts.Atmospherics.AtmosphereSaveData.AtmosphereSaveData(Atmosphere) : void @06004D53
+		Assets.Scripts.Atmospherics.AtmosphericsManager.<ProcessAtmospheresClient>d__42.MoveNext() : void @06005F08
+		Assets.Scripts.Atmospherics.AtmosphericsManager.AtmosphericsLogic() : void @06004DEC
+		Assets.Scripts.Atmospherics.AtmosphericsManager.DisplayGas(GasMixture, Mole, string) : string @06004DFA
+		Assets.Scripts.Atmospherics.AtmosphericsManager.SerialiseDeltaState(RocketBinaryWriter) : void @06004E02
+		Assets.Scripts.Atmospherics.AtmosphericsManager.SerialiseOnJoin(RocketBinaryWriter) : void @06004E00
+		Assets.Scripts.Atmospherics.InternalAtmosphereConditioner.AirConditioning(Atmosphere) : void @06004E66
+		Assets.Scripts.Atmospherics.InternalAtmosphereConditioner.FillWaste() : bool @06004E64
+		Assets.Scripts.Atmospherics.InternalAtmosphereConditioner.GetGasFromTank() : void @06004E67
+		Assets.Scripts.Atmospherics.InternalAtmosphereConditioner.HandleFilters() : void @06004E65
+		Assets.Scripts.Atmospherics.InternalAtmosphereConditioner.SetGasToTank() : void @06004E63
+		Assets.Scripts.AtmosphericsController.CloneGlobalAtmosphere(Grid3, long) : Atmosphere @0600176A
+		Assets.Scripts.AtmosphericsController.ControllerWork() : void @06001767
+		Assets.Scripts.AtmosphericsController.CreateGlobalAtmosphere() : void @06001766
+		Assets.Scripts.AtmosphericsController.IgniteAtmosphere(Grid3, float) : void @06001776
+		Assets.Scripts.Inventory.InventoryManager.DebugContentsMethod() : void @06002C89
+		Assets.Scripts.Networking.AddGasCommand.Process() : void @06002AE0
+		Assets.Scripts.Networking.ServerAdmin.CommandAddTankGas(List<string>, ChatMessage) : void @06002B84
+		Assets.Scripts.Networking.SpawnDynamicThingInSlotMessage.<GasMixture>k__BackingField : GasMixture @0400274E
+		Assets.Scripts.Networking.SpawnDynamicThingInSlotMessage.Deserialize(RocketBinaryReader) : void @06002B4B
+		Assets.Scripts.Networking.SpawnDynamicThingInSlotMessage.GasMixture : GasMixture @170005C5
+		Assets.Scripts.Networking.SpawnDynamicThingInSlotMessage.Process() : void @06002B4A
+		Assets.Scripts.Networking.SpawnDynamicThingInSlotMessage.Serialize(RocketBinaryWriter) : void @06002B4C
+		Assets.Scripts.Networks.PipeNetwork.DivideNetworkAtmosphere(List<PipeNetwork>, GasMixture) : void @060028B4
+		Assets.Scripts.Networks.PipeNetwork.Merge(PipeNetwork) : void @060028B2
+		Assets.Scripts.Objects.DynamicAirConditioner.OnAtmosphericTick() : void @06002E83
+		Assets.Scripts.Objects.DynamicComposter.<DoFertilizationProcessing>d__47.MoveNext() : bool @0600583E
+		Assets.Scripts.Objects.DynamicComposter.DoProcessing() : void @06002E92
+		Assets.Scripts.Objects.DynamicComposter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06002E9F
+		Assets.Scripts.Objects.DynamicGasCanister.OnAtmosphericsBegin() : void @06002EC0
+		Assets.Scripts.Objects.DynamicGasCanister.OnAtmosphericTick() : void @06002EC4
+		Assets.Scripts.Objects.DynamicGasCanister.OnDamageDestroyed() : void @06002ECC
+		Assets.Scripts.Objects.DynamicGenerator.OnAtmosphericTick() : void @06002EDE
+		Assets.Scripts.Objects.DynamicGenerator.OnChildEnterInventory(DynamicThing) : void @06002ED3
+		Assets.Scripts.Objects.DynamicGenerator.OnChildExitInventory(DynamicThing) : void @06002ED6
+		Assets.Scripts.Objects.DynamicGenerator.PowerGeneration() : void @06002EDC
+		Assets.Scripts.Objects.DynamicScrubber.GetFromAtmos() : void @06002EFD
+		Assets.Scripts.Objects.DynamicScrubber.GetPassiveTooltip(Collider) : PassiveTooltip @06002EF5
+		Assets.Scripts.Objects.DynamicScrubber.ReleaseToAtmos() : void @06002EFC
+		Assets.Scripts.Objects.Electrical.AirConditioner.FillWaste() : bool @060042F6
+		Assets.Scripts.Objects.Electrical.AirConditioner.OnAtmosphericTick() : void @060042F8
+		Assets.Scripts.Objects.Electrical.Engine.OnAtmosphericTick() : void @060044E0
+		Assets.Scripts.Objects.Electrical.Engine.OnPreAtmosphere() : void @060044DF
+		Assets.Scripts.Objects.Electrical.GasSensor.GasRatio(LogicType) : float @06004536
+		Assets.Scripts.Objects.Electrical.PowerGeneratorPipe.OnAtmosphericTick() : void @06004526
+		Assets.Scripts.Objects.Electrical.SpawnPointAtmospherics.OnAtmosphericTick() : void @060049D8
+		Assets.Scripts.Objects.Electrical.StirlingEngine.GetLogicValue(LogicType) : double @06004A3D
+		Assets.Scripts.Objects.Electrical.StirlingEngine.HandlePressureCheck() : void @06004A38
+		Assets.Scripts.Objects.Electrical.StirlingEngine.OnAtmosphereClient() : void @06004A37
+		Assets.Scripts.Objects.Electrical.StirlingEngine.OnAtmosphericTick() : void @06004A36
+		Assets.Scripts.Objects.Electrical.StirlingEngine.ResetGasMixtures() : GasMixture @06004A35
+		Assets.Scripts.Objects.Electrical.VendingMachineRefrigerated.InitInternalAtmosphere() : void @06004AE0
+		Assets.Scripts.Objects.Electrical.VendingMachineRefrigerated.OnAtmosphericTick() : void @06004AE7
+		Assets.Scripts.Objects.Electrical.WallCooler.OnAtmosphericTick() : void @06004B00
+		Assets.Scripts.Objects.Electrical.WallHeater.OnAtmosphericTick() : void @06004B07
+		Assets.Scripts.Objects.Entities.Animal.OnLifeCreated(Brain) : void @06003E0C
+		Assets.Scripts.Objects.Entities.Human.CreateLungs() : void @06003E98
+		Assets.Scripts.Objects.Entities.Human.TakeBreath() : void @06003EC0
+		Assets.Scripts.Objects.Entity.LifeBreathe() : void @06002FF5
+		Assets.Scripts.Objects.Entity.TakeBreath() : void @06002FF3
+		Assets.Scripts.Objects.GeyserObject.CalculateGas() : void @0600302E
+		Assets.Scripts.Objects.GeyserObject.OnAtmosphereTick() : void @06003036
+		Assets.Scripts.Objects.GeyserObject._spawnGas : GasMixture @04002B74
+		Assets.Scripts.Objects.Items.AtmosAnalyser.OnPreScreenUpdate() : void @0600397F
+		Assets.Scripts.Objects.Items.AtmosAnalyser.SetHash(Mole, ref int, ref GasMixture) : void @06003980
+		Assets.Scripts.Objects.Items.Dynamite.OnAtmosphericTick() : void @06003E06
+		Assets.Scripts.Objects.Items.FireExtinguisher.ExtinguishAtmos(Vector3) : void @06003AB8
+		Assets.Scripts.Objects.Items.GasCanister.OnAtmosphericsBegin() : void @06003ADD
+		Assets.Scripts.Objects.Items.GasCanister.OnAtmosphericTick() : void @06003AE0
+		Assets.Scripts.Objects.Items.GasCanister.OnDamageDestroyed() : void @06003AE6
+		Assets.Scripts.Objects.Items.GasCanister.Smelt(Atmosphere, ReagentMixture) : void @06003AE3
+		Assets.Scripts.Objects.Items.GasCanister.SpawnGas() : void @06003ADE
+		Assets.Scripts.Objects.Items.GasFilter.FilterGas(ref GasMixture, ref GasMixture) : void @06003AF0
+		Assets.Scripts.Objects.Items.GasFilter.FilterGas(ref GasMixture, ref GasMixture, Atmosphere, float) : float @06003AEF
+		Assets.Scripts.Objects.Items.GasMask.FlushMask() : void @06003B05
+		Assets.Scripts.Objects.Items.Jetpack.HasPropellent : bool @1700086E
+		Assets.Scripts.Objects.Items.Jetpack.UpdateJetpackEmissions() : void @06003BAB
+		Assets.Scripts.Objects.Items.Ore.GasMixture : GasMixture @04003421
+		Assets.Scripts.Objects.Items.Ore.Ore() : void @06003C49
+		Assets.Scripts.Objects.Items.Ore.Smelt(Atmosphere, ReagentMixture) : void @06003C47
+		Assets.Scripts.Objects.Items.Ore.Start() : void @06003C46
+		Assets.Scripts.Objects.Items.Plant.DoPlantBreathOut(float) : float @06003C8C
+		Assets.Scripts.Objects.Items.Plant.DoPlantBreathOutEndothermic(float) : float @06003C8D
+		Assets.Scripts.Objects.Items.Plant.MoleEfficiencyRatio(SpawnGas) : float @06003C89
+		Assets.Scripts.Objects.Items.Plant.TakePlantBreath() : void @06003C8A
+		Assets.Scripts.Objects.Items.Plant.TakePlantDrink() : float @06003C8B
+		Assets.Scripts.Objects.Items.RoadFlare.OnAtmosphericTick() : void @06003D09
+		Assets.Scripts.Objects.Items.SprayCan.OnUseItem(float, Thing) : bool @06003D2D
+		Assets.Scripts.Objects.Items.WeldingTorch.EjectInternalAtmosphere() : void @06003DDB
+		Assets.Scripts.Objects.Items.WeldingTorch.OnAtmosphericTick() : void @06003DDC
+		Assets.Scripts.Objects.Pipes.ActiveVent.OnAtmosphericTick() : void @06003F4F
+		Assets.Scripts.Objects.Pipes.Device.OnAtmosphericTick() : void @0600404C
+		Assets.Scripts.Objects.Pipes.DeviceAtmospherics.MoveTargetPressure(Atmosphere, Atmosphere) : void @06004074
+		Assets.Scripts.Objects.Pipes.DeviceAtmospherics.MoveToEqualize(Atmosphere, Atmosphere, float, Atmosphere.MatterState) : void @0600406E
+		Assets.Scripts.Objects.Pipes.DeviceAtmospherics.MoveToEqualizeBidirectional(Atmosphere, Atmosphere, float, Atmosphere.MatterState) : void @06004073
+		Assets.Scripts.Objects.Pipes.DeviceAtmospherics.MoveVolume(Atmosphere, Atmosphere, float, Atmosphere.MatterState) : void @06004076
+		Assets.Scripts.Objects.Pipes.ElectrolysisMachine.OnAtmosphericTick() : void @06004174
+		Assets.Scripts.Objects.Pipes.FiltrationMachine.OnAtmosphericTick() : void @0600417F
+		Assets.Scripts.Objects.Pipes.Furnace.HandleGasInput() : void @06004183
+		Assets.Scripts.Objects.Pipes.FurnaceBase.Explode() : void @060041B0
+		Assets.Scripts.Objects.Pipes.FurnaceBase.HandleBrokenMix() : void @060041A4
+		Assets.Scripts.Objects.Pipes.GasTankStorage.GetLogicValue(LogicType) : double @060041CA
+		Assets.Scripts.Objects.Pipes.GasTankStorage.OnAtmosphericTick() : void @060041C5
+		Assets.Scripts.Objects.Pipes.H2CombustorMachine.OnAtmosphericTick() : void @060041D0
+		Assets.Scripts.Objects.Pipes.HeatExchanger.OnAtmosphericTick() : void @060041D5
+		Assets.Scripts.Objects.Pipes.Mixer.OnAtmosphericTick() : void @06004240
+		Assets.Scripts.Objects.Pipes.MixingMachine.OnAtmosphericTick() : void @06004251
+		Assets.Scripts.Objects.Pipes.Pipe.OnAtmosphericTick() : void @06004274
+		Assets.Scripts.Objects.Pipes.Pipe.OnDestroy() : void @0600427B
+		Assets.Scripts.Objects.Pipes.PipeAnalysizer.GasRatio(LogicType) : float @0600428C
+		Assets.Scripts.Objects.Pipes.PipeAnalysizer.GetPassiveTooltip(Collider) : PassiveTooltip @0600428D
+		Assets.Scripts.Objects.Pipes.PipeHeater.OnAtmosphericTick() : void @0600429C
+		Assets.Scripts.Objects.Pipes.PressureRegulator.OnAtmosphericTick() : void @060042AF
+		Assets.Scripts.Objects.Pipes.Tank.GetLogicValue(LogicType) : double @060042C5
+		Assets.Scripts.Objects.Pipes.Tank.OnAtmosphericTick() : void @060042C3
+		Assets.Scripts.Objects.Pipes.Valve.OnAtmosphericTick() : void @060042C8
+		Assets.Scripts.Objects.PortableAtmospherics.Delete(Thing) : void @0600317E
+		Assets.Scripts.Objects.PortableAtmospherics.FillWaste(float) : bool @06003180
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketAutonomous.GetTotalFuelStored() : double @0600371B
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketAutonomous.HasCorrectFuelQuantity(float) : bool @06003723
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketAutonomous.RemoveFuelFromTank(float) : bool @06003715
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketCommand.RocketMeetsFuelCondition(float) : bool @0600374E
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketTank.GetLogicValue(LogicType) : double @06003767
+		Assets.Scripts.Objects.SpaceShuttle.ModularRocketTank.HasCorrectFuelRatio() : bool @06003761
+		Assets.Scripts.Objects.Structure.WorldChangeChecks(bool) : void @06003305
+		Assets.Scripts.Objects.Structures.SuitStorage.OnAtmosphericTick() : void @06003665
+		Assets.Scripts.Objects.Structures.WaterBottleStorage.AssessError() : void @06003698
+		Assets.Scripts.Objects.Structures.WaterBottleStorage.OnAtmosphericTick() : void @06003696
+		Assets.Scripts.Objects.Thing.GasRatio(LogicType) : float @06003345
+		Assets.Scripts.Objects.Thing.GasRatio(LogicType, GasMixture) : float @06003346
+		Assets.Scripts.Objects.Thing.OnFireConsume(Atmosphere, float) : bool @06003444
+		Assets.Scripts.Objects.Thing.ShouldIgnite(Atmosphere) : bool @06003446
+		Assets.Scripts.Objects.Weapons.EnergyGun.OnAtmosphericTick() : void @06003539
+		Assets.Scripts.Objects.Weapons.Grenade.OnAtmosphericTick() : void @0600356F
+		Assets.Scripts.OnAtmosphereRoomEvent.IsValidMoleCounts(Atmosphere) : bool @06001946
+		Assets.Scripts.ResetGasesAndLiquidsActionEvent.ResetGasesAndLiquidsActionEvent(List<string>) : void @06001880
+		Assets.Scripts.Serialization.XmlSaveLoad.<LoadWorld>d__201.MoveNext() : void @06005EE4
+		Assets.Scripts.Serialization.XmlSaveLoad.<LoadWorld>g__RemoveAllExceptContentType|201_2(Atmosphere, Pipe.ContentType, ref XmlSaveLoad.<>c__DisplayClass201_1) : void @06004D34
+		Assets.Scripts.SpawnAtmoEventAction.SpawnAtmoEventAction(List<string>) : void @0600187E
+		Assets.Scripts.SpawnGasSkeleton.GetGasMixture(List<string>, int, int) : GasMixture @0600187D
+		Assets.Scripts.Trading.CalculateItemValue(TradingItemDat) : float @06001D5A
+		Assets.Scripts.Trading.HandleGasTransfer(GasCanister, ref TradingItemDat) : void @06001D5E
+		Assets.Scripts.Trading.HandleSpawnItemForPlayer(VendingMachine, TraderContact, int, ref List<int>) : void @06001D71
+		Assets.Scripts.Trading.HandleStackableTransferToPlayer(TradingItemDat, List<int>, VendingMachine) : void @06001D6D
+		Assets.Scripts.TradingItemDat.Contents : GasMixture @04001A9E
+		Assets.Scripts.TradingItemDat.CreateGasMix(int) : void @06001CDF
+		Assets.Scripts.TradingItemDat.GasAmount : float @1700041B
+		Assets.Scripts.UI.Stationpedia.GenerateList(string, List<Mole>) : void @06002496
+		Assets.Scripts.UI.Stationpedia.PopulateGases() : void @0600248C
+		Assets.Scripts.UI.WorldDecription.SetWorld(WorldSetting) : void @06002599
+		HydroponicsPlanter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06000B1E
+		Objects.Electrical.AdvancedComposter.CanDoProcessing() : bool @06001515
+		Objects.Electrical.AdvancedComposter.DoProcessing() : void @06001519
+		Objects.Electrical.AdvancedComposter.InteractWith(Interactable, Interaction, bool) : Thing.DelayedActionInstance @06001518
+		Objects.Electrical.AdvancedComposter.SetLogicValue(LogicType, double) : void @0600151E
+		Objects.Electrical.FridgePowered.InitInternalAtmosphere() : void @06001566
+		Objects.Electrical.FridgePowered.OnAtmosphericTick() : void @06001567
+		Objects.Electrical.LiquidDrain.OnAtmosphericTick() : void @06001597
+		Objects.SpaceShuttle.ModularRocketActionCollector.<StartCollectingGas>d__7.MoveNext() : bool @06005147
+		OnServer.SpawnDynamicThingInSlot(long, int, int, float, GasMixture) : void @06000AC2
+		WorldManager.GlobalGasMixture : GasMixture @17000289
+		WorldSetting.GlobalGasMixture : GasMixture @17000285
