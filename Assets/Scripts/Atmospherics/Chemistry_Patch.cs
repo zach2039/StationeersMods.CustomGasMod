@@ -4,7 +4,7 @@ using UnityEngine;
 using Assets.Scripts.Atmospherics;
 using HarmonyLib;
 
-namespace zach2039.CustomGasMod.Scripts.Atmospherics
+namespace Assets.Scripts.Atmospherics
 {
     [HarmonyPatch(typeof(Chemistry))]
     public static class Chemistry_Patch

@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using Assets.Scripts.Atmospherics;
 using Assets.Scripts.Util;
+using Assets.Scripts.Networking;
 using UnityEngine;
-using UnityEngine.Networking;
 
-namespace zach2039.CustomGasMod
+namespace zach2039.CustomGasMod.Assets.Scripts.Atmospherics
 {
-    public class ModMole : IRocketReaderWriter, ICloneable
+    public class ModMole : UnityEngine.Networking.IRocketReaderWriter, ICloneable
     {
         private ModMole() {}
 
@@ -66,7 +67,7 @@ namespace zach2039.CustomGasMod
             return copyModMole;
         }
 
-        public void Read(Assets.Scripts.Networking.RocketBinaryReader reader)
+        public void Read(RocketBinaryReader reader)
         {
             this.ReadOnly = reader.ReadBoolean();
             this._energyCached = reader.ReadSingle();
@@ -75,7 +76,7 @@ namespace zach2039.CustomGasMod
             this._quantity = reader.ReadSingle();
         }
 
-        public void Write(Assets.Scripts.Networking.RocketBinaryWriter writer)
+        public void Write(RocketBinaryWriter writer)
         {
             writer.WriteBoolean(this.ReadOnly);
             writer.WriteSingle(this._energyCached);
@@ -120,13 +121,13 @@ namespace zach2039.CustomGasMod
         public void UpdateCache()
         {
             this._energyCached = this._energy;
-            if (Assets.Scripts.Networking.NetworkManager.IsServer && RocketMath.ApproximatelyByRatio(this._energyCached, this._lastEnergyDirtied, 0.02f))
+            if (NetworkManager.IsServer && RocketMath.ApproximatelyByRatio(this._energyCached, this._lastEnergyDirtied, 0.02f))
             {
                 this.EnergyDirty = true;
                 this._lastEnergyDirtied = this._energyCached;
             }
             this._quantityCached = this._quantity;
-            if (Assets.Scripts.Networking.NetworkManager.IsServer && !RocketMath.ApproximatelyByRatio(this._quantityCached, this._lastQuantityDirtied, 0.02f))
+            if (NetworkManager.IsServer && !RocketMath.ApproximatelyByRatio(this._quantityCached, this._lastQuantityDirtied, 0.02f))
             {
                 this.QuantityDirty = true;
                 this._lastQuantityDirtied = this._quantityCached;
@@ -265,7 +266,7 @@ namespace zach2039.CustomGasMod
         {
             get
             {
-                return Assets.Scripts.Localization.GetInterface(Animator.StringToHash("Mole" + this.Name + "Description"), false);
+                return Localization.GetInterface(Animator.StringToHash("Mole" + this.Name + "Description"), false);
             }
         }
 
@@ -273,7 +274,7 @@ namespace zach2039.CustomGasMod
         {
             get
             {
-                if (this.IsCachable && (!Atmosphere.CanWriteAccess || Assets.Scripts.Networking.NetworkManager.IsClient))
+                if (this.IsCachable && (!Atmosphere.CanWriteAccess || NetworkManager.IsClient))
                 {
                     return this._energyCached;
                 }
@@ -314,7 +315,7 @@ namespace zach2039.CustomGasMod
         {
             get
             {
-                if (this.IsCachable && (!Atmosphere.CanWriteAccess || Assets.Scripts.Networking.NetworkManager.IsClient))
+                if (this.IsCachable && (!Atmosphere.CanWriteAccess || NetworkManager.IsClient))
                 {
                     return this._quantityCached;
                 }

@@ -18,7 +18,7 @@ using Reagents;
 // for prefab string hash
 // note that prefab name crc must not overflow int32
 
-namespace zach2039.CustomGasMod
+namespace zach2039.CustomGasMod.Assets.Scripts
 {
     public class CustomGas : ModBehaviour
     {

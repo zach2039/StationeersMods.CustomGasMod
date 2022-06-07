@@ -7,7 +7,7 @@ using Assets.Scripts.Networking;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace zach2039.CustomGasMod
+namespace zach2039.CustomGasMod.Assets.Scripts.Atmospherics
 {
     public class ModGasMixture : IRocketReaderWriter, ICloneable
     {
@@ -104,6 +104,13 @@ namespace zach2039.CustomGasMod
             return ModMole.Invalid;
         }
 
+        public ModMole GetGasById(int gasId)
+        {
+            ModMole modMole;
+            this.ContainedGases.TryGetValue(gasId, out modMole);
+            return modMole;
+        }
+
         public float TotalMoles(Atmosphere.MatterState matterState)
         {
             float totalMoles = 0f;
@@ -147,17 +154,6 @@ namespace zach2039.CustomGasMod
                 default:
                     return;
             }
-        }
-
-        public void Add(ModMole mole)
-        {
-            if (!mole.IsValid)
-            {
-                return;
-            }
-            ModMole modMole;
-            this.ContainedGases.TryGetValue(mole.ID, out modMole);
-            modMole.Add(mole);
         }
 
         public void Set(ModGasMixture gasMixture, Atmosphere.MatterState matterState = Atmosphere.MatterState.All)
@@ -257,7 +253,7 @@ namespace zach2039.CustomGasMod
             {
                 if (modMole.MatterState == stateToRemove || stateToRemove == Atmosphere.MatterState.All)
                 {
-                    result.Add(modMole.Remove(modMole.Quantity * moleRemovalPercent));
+                    result.GetGasById(modMole.ID).Add(modMole.Remove(modMole.Quantity * moleRemovalPercent));
                 }
             }
             return result;
