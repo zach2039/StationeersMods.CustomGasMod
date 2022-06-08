@@ -80,7 +80,7 @@ namespace Assets.Scripts.Atmospherics
 			}
 			else if (productType == Atmosphere.MatterState.Gas || productType == Atmosphere.MatterState.All)
 			{
-				ModMole pollutantMole = gasMixture.GetGasByName("pollutant");
+				ModMole pollutantMole = gasMixture.GetGasByName("carbonmonoxide");
 				ModMole mole2 = ModMole.Create(pollutantMole.ID, num5 * mole.Quantity, 0f);
 				mole2.Energy = num5 * mole.Energy;
 				ModMole carbondioxideMole = gasMixture.GetGasByName("carbondioxide");

@@ -32,7 +32,7 @@ namespace Assets.Scripts.Inventory
 			____gasContents.Clear();
 			if (InventoryManager.Parent.BreathingAtmosphere != null)
 			{
-				ModGasMixture gasMixture = InventoryManager.Parent.BreathingAtmosphere.GetAdditionalData().ModGasMixture;
+				ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(InventoryManager.Parent.BreathingAtmosphere).ModGasMixture;
 				foreach (ModMole modMole in gasMixture.ContainedGases.Values)
 				{
 					____gasContents.Append(ModAtmosphericsManager.DisplayGas(gasMixture, modMole, "F2"));

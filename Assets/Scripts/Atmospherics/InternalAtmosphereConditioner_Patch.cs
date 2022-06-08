@@ -26,8 +26,8 @@ namespace Assets.Scripts.Atmospherics
 				ModGasFilter gasFilter = filterSlots[i].Occupant as ModGasFilter;
 				if (gasFilter)
 				{
-					ModGasMixture internalGasMixture = __instance.InternalAtmosphere.GetAdditionalData().ModGasMixture;
-					ModGasMixture wasteGasMixture = __instance.WasteTank.InternalAtmosphere.GetAdditionalData().ModGasMixture;
+					ModGasMixture internalGasMixture = AtmosphereExtension.GetAdditionalData(__instance.InternalAtmosphere).ModGasMixture;
+					ModGasMixture wasteGasMixture = AtmosphereExtension.GetAdditionalData(__instance.WasteTank.InternalAtmosphere).ModGasMixture;
 					gasFilter.FilterGas(ref internalGasMixture, ref wasteGasMixture);
 				}
 			}
