@@ -7,7 +7,9 @@ using Assets.Scripts.Atmospherics;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Util;
 using HarmonyLib;
+using Assets.Scripts.Networking;
 using UnityEngine;
+using UnityEngine.Networking;
 using zach2039.CustomGasMod.Assets.Scripts.Atmospherics;
 
 namespace Assets.Scripts.Atmospherics
@@ -188,17 +190,242 @@ namespace Assets.Scripts.Atmospherics
 			return false; // skip original method
 		}
 
-		[HarmonyPatch("ParticalPressureO2", MethodType.Setter)]
-		public float ParticalPressureO2
+		[HarmonyPatch("React")]
+		[HarmonyPrefix]
+		public static bool React_Patch(Atmosphere __instance, ref bool ____inflamed, ref bool ____sparked)
 		{
-			get
-			{
-				if (this.IsCachable && !Atmosphere.CanWriteAccess)
-				{
-					return this._particalPressureO2Cached;
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			float temperature = gasMixture.Temperature;
+			bool flag = __instance.Ignited || temperature > Atmosphere.FuelAutoignitionTemperature;
+			__instance.BurnedPropaneRatio = 0f;
+			__instance.CleanBurnRate = 0f;
+			bool canExtinguish = true;
+			foreach (ModMole modMole in gasMixture.ContainedGases.Values)
+            {
+				if (modMole.IsFuel)
+                {
+					float num = modMole.LowerFlammableLimit;
+					float num2 = modMole.UpperFlammableLimit;
+					float num3 = modMole.LimitingOxygenConcentration;
+					if (!flag)
+					{
+						num += Atmosphere.LimitOffsetNotOnFire;
+						num2 -= Atmosphere.LimitOffsetNotOnFire;
+						num3 += Atmosphere.LimitOffsetNotOnFire;
+					}
+					____sparked = false;
+					float num4 = modMole.Quantity / gasMixture.TotalMolesGassesAndLiquids;
+					float num5 = gasMixture.GetGasByName("oxygen").Quantity / gasMixture.TotalMolesGassesAndLiquids;
+					if (!(temperature < Atmosphere.PropaneMinimumBurnTemperature || !flag || num4 < num || num4 > num2 || num5 < num3 || __instance.PressureGassesAndLiquids < Atmosphere.MinimumCombustionPressure))
+					{
+						// some type of fuel is burning, so cannot stop burning
+						canExtinguish = false;
+					}
 				}
-				return this.GetAdditionalData().ModGasMixture.GetGasByName("oxygen").Quantity * 8.3144f * this.GetAdditionalData().ModGasMixture.Temperature / this.Volume;
+            }
+			if (canExtinguish)
+            {
+				____inflamed = false;
+				return false; // skip original method
 			}
+			__instance.Combust(Atmosphere.MatterState.Gas);
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("Read", new Type[] { typeof(RocketBinaryReader) })]
+		[HarmonyPrefix]
+		public static bool Read_Patch(Atmosphere __instance, RocketBinaryReader reader, ref float ____temperatureCachedClient)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsNetworkUpdateRequired(8U))
+			{
+				__instance.Direction = reader.ReadVector3Half();
+			}
+			if (__instance.IsNetworkUpdateRequired(16U))
+			{
+				byte b = reader.ReadByte();
+				__instance.CleanBurnRate = (float)b / 255f;
+				byte b2 = reader.ReadByte();
+				__instance.BurnedPropaneRatio = (float)b2 / 255f;
+				__instance.Inflamed = reader.ReadBoolean();
+			}
+			if (__instance.IsNetworkUpdateRequired(32U))
+			{
+				__instance.Volume = (float)reader.ReadUInt16();
+			}
+			if (__instance.IsNetworkUpdateRequired(64U))
+			{
+				gasMixture.Read(reader);
+			}
+			if (__instance.IsNetworkUpdateRequired(4U))
+			{
+				____temperatureCachedClient = reader.ReadSingle();
+				gasMixture.TotalEnergy = ____temperatureCachedClient * gasMixture.HeatCapacity;
+			}
+			__instance.SetFlame(__instance.BurnedPropaneRatio, __instance.CleanBurnRate);
+			__instance.LastNetworkUpdateTime = DateTime.Now;
+			if (__instance.Mode == Atmosphere.AtmosphereMode.Thing && __instance.Thing != null)
+			{
+				__instance.Thing.OnAtmosphereClient();
+			}
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("ParticalPressureO2", MethodType.Getter)]
+		public bool ParticalPressureO2_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureO2Cached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+            {
+				__result = ____particalPressureO2Cached;
+				return false; // skip original method
+			}
+			__result = gasMixture.GetGasByName("oxygen").Quantity * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("ParticalPressureNO2", MethodType.Getter)]
+		public bool ParticalPressureNO2_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureNO2Cached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____particalPressureNO2Cached;
+				return false; // skip original method
+			}
+			__result = gasMixture.GetGasByName("nitrousoxide").Quantity * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("ParticalPressureVolatiles", MethodType.Getter)]
+		public bool ParticalPressureVolatiles_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureVolatilesCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____particalPressureVolatilesCached;
+				return false; // skip original method
+			}
+			float fuelAmount = 0f;
+			foreach (ModMole modMole in gasMixture.ContainedGases.Values)
+            {
+				if (modMole.IsFuel)
+                {
+					fuelAmount += modMole.Quantity;
+				}
+            }
+			__result = fuelAmount * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("ParticalPressurePollutants", MethodType.Getter)]
+		public bool ParticalPressurePollutants_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressurePollutantsCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____particalPressurePollutantsCached;
+				return false; // skip original method
+			}
+			float pollutantAmount = 0f;
+			foreach (ModMole modMole in gasMixture.ContainedGases.Values)
+			{
+				if (modMole.IsPollutant)
+				{
+					pollutantAmount += modMole.Quantity;
+				}
+			}
+			__result = pollutantAmount * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("ParticalPressureToxins", MethodType.Getter)]
+		public bool ParticalPressureToxins_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureToxinsCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____particalPressureToxinsCached;
+				return false; // skip original method
+			}
+			float toxinAmount = 0f;
+			foreach (ModMole modMole in gasMixture.ContainedGases.Values)
+			{
+				if (modMole.IsToxic)
+				{
+					toxinAmount += modMole.Quantity;
+				}
+			}
+			__result = toxinAmount * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("PressureGasses", MethodType.Getter)]
+		public bool PressureGasses_Patch(Atmosphere __instance, ref float __result, ref float ____pressureGassesCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____pressureGassesCached;
+				return false; // skip original method
+			}
+			__result = gasMixture.TotalMolesGasses * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("PressureGassesAndLiquids", MethodType.Getter)]
+		public bool PressureGassesAndLiquids_Patch(Atmosphere __instance, ref float __result, ref float ____pressureGassesAndLiquidsCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____pressureGassesAndLiquidsCached;
+				return false; // skip original method
+			}
+			__result = gasMixture.TotalMolesGassesAndLiquids * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("PressureLiquids", MethodType.Getter)]
+		public bool PressureLiquids_Patch(Atmosphere __instance, ref float __result, ref float ____pressureLiquidsCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____pressureLiquidsCached;
+				return false; // skip original method
+			}
+			__result = gasMixture.TotalMolesLiquids * 8.3144f * gasMixture.Temperature / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("TotalMoles", MethodType.Getter)]
+		public bool TotalMoles_Patch(Atmosphere __instance, ref float __result, ref float ____totalMolesCached)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
+			{
+				__result = ____totalMolesCached;
+				return false; // skip original method
+			}
+			__result = gasMixture.TotalMolesGassesAndLiquids;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("WaterHeight", MethodType.Getter)]
+		public bool WaterHeight_Patch(Atmosphere __instance, ref float __result)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			__result = gasMixture.GetGasByName("water").Quantity * Chemistry.WaterMolarVolume / __instance.Volume;
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("WaterRatio", MethodType.Getter)]
+		public bool WaterRatio_Patch(Atmosphere __instance, ref float __result)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			__result = gasMixture.GetGasByName("water").Quantity / gasMixture.TotalMolesGassesAndLiquids;
+			return false; // skip original method
 		}
 	}
 }
