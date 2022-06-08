@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace zach2039.CustomGasMod.Assets.Scripts
+namespace zach2039.CustomGas.Assets.Scripts
 {
     public class AtmosphereStateEventAdditionalData
     {

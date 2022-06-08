@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Atmospherics;
 using UnityEngine;
 
-namespace zach2039.CustomGasMod.Assets.Scripts.Atmospherics
+namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 {
     public static class AtmosphereSaveDataExtension
     {

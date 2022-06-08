@@ -7,7 +7,7 @@ using Assets.Scripts.Util;
 using Assets.Scripts.Networking;
 using UnityEngine;
 
-namespace zach2039.CustomGasMod.Assets.Scripts.Atmospherics
+namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 {
     public class ModMole : UnityEngine.Networking.IRocketReaderWriter, ICloneable
     {

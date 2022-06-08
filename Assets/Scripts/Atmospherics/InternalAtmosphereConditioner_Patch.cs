@@ -8,8 +8,8 @@ using Assets.Scripts.GridSystem;
 using Assets.Scripts.Objects;
 using HarmonyLib;
 using UnityEngine;
-using zach2039.CustomGasMod.Assets.Scripts.Atmospherics;
-using zach2039.CustomGasMod.Assets.Scripts.Objects.Items;
+using zach2039.CustomGas.Assets.Scripts.Atmospherics;
+using zach2039.CustomGas.Assets.Scripts.Objects.Items;
 
 namespace Assets.Scripts.Atmospherics
 {

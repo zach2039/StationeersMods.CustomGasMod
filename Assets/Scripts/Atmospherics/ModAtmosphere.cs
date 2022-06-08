@@ -5,7 +5,7 @@ using UnityEngine;
 using Assets.Scripts;
 using Assets.Scripts.Atmospherics;
 
-namespace zach2039.CustomGasMod.Assets.Scripts.Atmospherics
+namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 {
     public class ModAtmosphere : Atmosphere
     {

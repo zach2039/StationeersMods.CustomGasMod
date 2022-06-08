@@ -5,9 +5,9 @@ using Assets.Scripts;
 using Assets.Scripts.Atmospherics;
 using Assets.Scripts.Objects.Items;
 using Assets.Scripts.Objects.Clothing;
-using zach2039.CustomGasMod.Assets.Scripts.Atmospherics;
+using zach2039.CustomGas.Assets.Scripts.Atmospherics;
 
-namespace zach2039.CustomGasMod.Assets.Scripts.Objects.Items
+namespace zach2039.CustomGas.Assets.Scripts.Objects.Items
 {
     public class ModGasFilter : GasFilter
     {

@@ -10,7 +10,7 @@ using HarmonyLib;
 using Assets.Scripts.Networking;
 using UnityEngine;
 using UnityEngine.Networking;
-using zach2039.CustomGasMod.Assets.Scripts.Atmospherics;
+using zach2039.CustomGas.Assets.Scripts.Atmospherics;
 
 namespace Assets.Scripts.Atmospherics
 {
@@ -268,6 +268,63 @@ namespace Assets.Scripts.Atmospherics
 			{
 				__instance.Thing.OnAtmosphereClient();
 			}
+			return false; // skip original method
+		}
+
+		[HarmonyPatch("Write", new Type[] { typeof(RocketBinaryWriter), typeof(byte) })]
+		[HarmonyPrefix]
+		public static bool Write_Patch(Atmosphere __instance, ref float ____temperatureCachedClient, RocketBinaryWriter writer, byte quantitiesDirtiedFlag = 0)
+		{
+			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			writer.WriteInt64(__instance.ReferenceId);
+			writer.WriteByte((byte)__instance.NetworkUpdateFlags);
+			writer.WriteByte((byte)__instance.Mode);
+			if (__instance.IsNetworkUpdateRequired(1U))
+			{
+				Atmosphere.AtmosphereMode mode = __instance.Mode;
+				if (mode != Atmosphere.AtmosphereMode.Network)
+				{
+					if (mode != Atmosphere.AtmosphereMode.Thing)
+					{
+						writer.WriteInt64(0L);
+					}
+					else
+					{
+						writer.WriteInt64(__instance.Thing.ReferenceId);
+					}
+				}
+				else
+				{
+					writer.WriteInt64(__instance.PipeNetwork.ReferenceId);
+				}
+			}
+			if (__instance.IsNetworkUpdateRequired(2U))
+			{
+				writer.WriteGrid3(__instance.Grid);
+			}
+			if (__instance.IsNetworkUpdateRequired(8U))
+			{
+				writer.WriteVector3Half(__instance.Direction);
+			}
+			if (__instance.IsNetworkUpdateRequired(16U))
+			{
+				writer.WriteByte((byte)Mathf.RoundToInt(__instance.CleanBurnRate * 255f));
+				writer.WriteByte((byte)Mathf.RoundToInt(__instance.BurnedPropaneRatio * 255f));
+				writer.WriteBoolean(__instance.Inflamed);
+			}
+			if (__instance.IsNetworkUpdateRequired(32U))
+			{
+				writer.WriteUInt16((ushort)__instance.Volume);
+			}
+			if (__instance.IsNetworkUpdateRequired(64U))
+			{
+				gasMixture.Write(writer);
+			}
+			if (__instance.IsNetworkUpdateRequired(4U))
+			{
+				writer.WriteSingle(__instance.Temperature);
+			}
+			__instance.LastNetworkUpdateTime = DateTime.Now;
 			return false; // skip original method
 		}
 

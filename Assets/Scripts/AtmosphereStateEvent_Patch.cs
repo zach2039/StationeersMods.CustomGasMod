@@ -7,9 +7,9 @@ using Assets.Scripts.Atmospherics;
 using Assets.Scripts.GridSystem;
 using HarmonyLib;
 using UnityEngine;
-using zach2039.CustomGasMod.Assets.Scripts.Atmospherics;
+using zach2039.CustomGas.Assets.Scripts.Atmospherics;
 
-namespace zach2039.CustomGasMod.Assets.Scripts
+namespace zach2039.CustomGas.Assets.Scripts
 {
     [HarmonyPatch(typeof(AtmosphereStateEvent))]
     public class AtmosphereStateEvent_Patch
