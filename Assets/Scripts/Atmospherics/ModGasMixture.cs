@@ -94,14 +94,20 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 
         public ModMole GetGasByName(string gasName)
         {
+            Debug.Log("[" + CustomGas.MODID + "] Looking for gas of name: " + gasName + ".");
+            Debug.Log("[" + CustomGas.MODID + "] Gas dictionary: " + this.ContainedGases + ".");
+            Debug.Log("[" + CustomGas.MODID + "] Gas dictionary count: " + this.ContainedGases.Count + ".");
+            Debug.Log("[" + CustomGas.MODID + "] Gas dictionary keys: " + this.ContainedGases.Keys + ".");
+            Debug.Log("[" + CustomGas.MODID + "] Gas dictionary values: " + this.ContainedGases.Values + ".");
             foreach (ModMole modMole in this.ContainedGases.Values)
             {
                 if (modMole.Name.ToLower() == gasName.ToLower())
                 {
+                    Debug.Log("[" + CustomGas.MODID + "] Found gas of name: " + gasName + ".");
                     return modMole;
                 } 
             }
-            Debug.LogError("Could not find gas of name: " + gasName + ".");
+            Debug.LogError("[" + CustomGas.MODID + "] Could not find gas of name: " + gasName + ".");
             return ModMole.Invalid;
         }
 
@@ -687,7 +693,7 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 
         public Vector3 Position { get; set; }
 
-        public static readonly ModGasMixture Invalid;
+        public static readonly ModGasMixture Invalid = new ModGasMixture();
 
         private bool _isCachable;
 

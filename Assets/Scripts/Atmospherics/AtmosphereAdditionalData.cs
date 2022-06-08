@@ -6,11 +6,8 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 {
     public class AtmosphereAdditionalData
     {
-        public ModGasMixture ModGasMixture;
+        public ModGasMixture ModGasMixture = new ModGasMixture();
 
-        public AtmosphereAdditionalData()
-        {
-            ModGasMixture = new ModGasMixture();
-        }
+        public AtmosphereAdditionalData() { }
     }
 }

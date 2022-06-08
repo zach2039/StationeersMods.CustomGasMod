@@ -21,33 +21,37 @@ namespace Assets.Scripts.Atmospherics
 	public class Atmosphere_Patch
 	{
 		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
+		[HarmonyPostfix]
 		public static void Atmosphere_Constructor0_Patch(Atmosphere __instance)
 		{
-			__instance.AddData(__instance.GetAdditionalData());
+			AtmosphereExtension.GetAdditionalData(__instance);
 			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
 		}
 
 		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
 		[HarmonyPatch(new Type[] { typeof(PipeNetwork), typeof(long) })]
+		[HarmonyPostfix]
 		public static void Atmosphere_Constructor1_Patch(Atmosphere __instance)
 		{
-			__instance.AddData(__instance.GetAdditionalData());
+			AtmosphereExtension.GetAdditionalData(__instance);
 			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
 		}
 
 		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
 		[HarmonyPatch(new Type[] { typeof(Thing), typeof(float), typeof(long) })]
+		[HarmonyPostfix]
 		public static void Atmosphere_Constructor2_Patch(Atmosphere __instance)
 		{
-			__instance.AddData(__instance.GetAdditionalData());
+			AtmosphereExtension.GetAdditionalData(__instance);
 			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
 		}
 
 		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
 		[HarmonyPatch(new Type[] { typeof(Grid3), typeof(GridController), typeof(long) })]
+		[HarmonyPostfix]
 		public static void Atmosphere_Constructor3_Patch(Atmosphere __instance)
 		{
-			__instance.AddData(__instance.GetAdditionalData());
+			AtmosphereExtension.GetAdditionalData(__instance);
 			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
 		}
 
@@ -55,7 +59,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool Combust_Patch(Atmosphere __instance, Atmosphere.MatterState productType, ref bool ____inflamed)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			float totalFuel = gasMixture.TotalFuel;
 			float quantity = gasMixture.GetGasByName("oxygen").Quantity;
 			float num = Mathf.Min(totalFuel, quantity * 2f);
@@ -63,7 +67,7 @@ namespace Assets.Scripts.Atmospherics
 			float num3 = 0.95f;
 			float num4 = num * num3;
 			float removedMoles = num2 * num3;
-			ModMole mole = gasMixture.GetGasByName("volatiles").Remove(num4); // FIXME: Need to remove fuel gases instead of just volatiles.
+			ModMole mole = gasMixture.GetGasByName("hydrogen").Remove(num4); // FIXME: Need to remove fuel gases instead of just hydrogen.
 			mole.Add(gasMixture.GetGasByName("oxygen").Remove(removedMoles));
 			float num5 = (productType == Atmosphere.MatterState.All) ? 0.5f : 1f;
 			if (productType == Atmosphere.MatterState.Liquid || productType == Atmosphere.MatterState.All)
@@ -96,7 +100,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool CombustableMix_Patch(Atmosphere __instance, ref float __result)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			__result = Mathf.Clamp01(gasMixture.GetGasByName("oxygen").Quantity / gasMixture.TotalFuel * 2f);
 			return false; // skip original method
 		}
@@ -105,7 +109,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool FireLevel_Patch(Atmosphere __instance, ref float __result)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			float totalFuel = gasMixture.TotalFuel;
 			float quantity = gasMixture.GetGasByName("oxygen").Quantity;
 			if (totalFuel < 0f || quantity < 0f)
@@ -122,11 +126,11 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPostfix]
 		public static void Init_Patch(Atmosphere __instance)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
-			if (__instance.GetAdditionalData().ModGasMixture == null)
-			{
-				Debug.LogError("[" + CustomGas.MODID + "] Gas mixture is null in atmosphere " + __instance.DisplayName + ".");
-			}
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
+		
+			Debug.Log("[" + CustomGas.MODID + "] Atmophere instance " + __instance + ".");
+			Debug.Log("[" + CustomGas.MODID + "] Gas mixture instance " + gasMixture + ".");
+			Debug.Log("[" + CustomGas.MODID + "] Gas " + gasMixture.GetGasByName("water") + ".");
 			gasMixture.GetGasByName("water").Clear();
 			gasMixture.GetGasByName("water").ReadOnly = true;
 		}
@@ -135,7 +139,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool IsCloseToGlobal_Patch(Atmosphere __instance, ref bool __result, float minPressure)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			ModGasMixture globalGasMixture = AtmosphericsController.GlobalAtmosphere.GetAdditionalData().ModGasMixture;
 			if (AtmosphericsController.GlobalAtmosphere == null)
 			{
@@ -172,7 +176,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool Load_Patch(Atmosphere __instance, AtmosphereSaveData saveData, ref Grid3 ____grid, ref Vector3 ____worldPosition)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			____worldPosition = saveData.Position;
 			if (__instance.ParentGridController != null)
 			{
@@ -214,7 +218,7 @@ namespace Assets.Scripts.Atmospherics
 			ref float ____pressureLiquidCached,
 			ref float ____totalMolesCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			____particalPressureO2Cached = __instance.ParticalPressureO2;
 			____particalPressureN2OCached = __instance.ParticalPressureN2O;
 			____particalPressureVolatilesCached = __instance.ParticalPressureVolatiles;
@@ -232,7 +236,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool React_Patch(Atmosphere __instance, ref bool ____inflamed, ref bool ____sparked)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			float temperature = gasMixture.Temperature;
 			bool flag = __instance.Ignited || temperature > Atmosphere.FuelAutoignitionTemperature;
 			__instance.BurnedPropaneRatio = 0f;
@@ -274,7 +278,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool Read_Patch(Atmosphere __instance, RocketBinaryReader reader, ref float ____temperatureCachedClient)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsNetworkUpdateRequired(8U))
 			{
 				__instance.Direction = reader.ReadVector3Half();
@@ -313,7 +317,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPrefix]
 		public static bool Write_Patch(Atmosphere __instance, ref float ____temperatureCachedClient, RocketBinaryWriter writer, byte quantitiesDirtiedFlag = 0)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			writer.WriteInt64(__instance.ReferenceId);
 			writer.WriteByte((byte)__instance.NetworkUpdateFlags);
 			writer.WriteByte((byte)__instance.Mode);
@@ -369,7 +373,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("ParticalPressureO2", MethodType.Getter)]
 		public bool ParticalPressureO2_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureO2Cached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
             {
 				__result = ____particalPressureO2Cached;
@@ -382,7 +386,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("ParticalPressureNO2", MethodType.Getter)]
 		public bool ParticalPressureNO2_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureNO2Cached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____particalPressureNO2Cached;
@@ -395,7 +399,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("ParticalPressureVolatiles", MethodType.Getter)]
 		public bool ParticalPressureVolatiles_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureVolatilesCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____particalPressureVolatilesCached;
@@ -416,7 +420,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("ParticalPressurePollutants", MethodType.Getter)]
 		public bool ParticalPressurePollutants_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressurePollutantsCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____particalPressurePollutantsCached;
@@ -437,7 +441,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("ParticalPressureToxins", MethodType.Getter)]
 		public bool ParticalPressureToxins_Patch(Atmosphere __instance, ref float __result, ref float ____particalPressureToxinsCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____particalPressureToxinsCached;
@@ -458,7 +462,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("PressureGasses", MethodType.Getter)]
 		public bool PressureGasses_Patch(Atmosphere __instance, ref float __result, ref float ____pressureGassesCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____pressureGassesCached;
@@ -471,7 +475,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("PressureGassesAndLiquids", MethodType.Getter)]
 		public bool PressureGassesAndLiquids_Patch(Atmosphere __instance, ref float __result, ref float ____pressureGassesAndLiquidsCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____pressureGassesAndLiquidsCached;
@@ -484,7 +488,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("PressureLiquids", MethodType.Getter)]
 		public bool PressureLiquids_Patch(Atmosphere __instance, ref float __result, ref float ____pressureLiquidsCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____pressureLiquidsCached;
@@ -497,7 +501,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("TotalMoles", MethodType.Getter)]
 		public bool TotalMoles_Patch(Atmosphere __instance, ref float __result, ref float ____totalMolesCached)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			if (__instance.IsCachable && !Atmosphere.CanWriteAccess)
 			{
 				__result = ____totalMolesCached;
@@ -510,7 +514,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("WaterHeight", MethodType.Getter)]
 		public bool WaterHeight_Patch(Atmosphere __instance, ref float __result)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			__result = gasMixture.GetGasByName("water").Quantity * Chemistry.WaterMolarVolume / __instance.Volume;
 			return false; // skip original method
 		}
@@ -518,7 +522,7 @@ namespace Assets.Scripts.Atmospherics
 		[HarmonyPatch("WaterRatio", MethodType.Getter)]
 		public bool WaterRatio_Patch(Atmosphere __instance, ref float __result)
 		{
-			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			ModGasMixture gasMixture = AtmosphereExtension.GetAdditionalData(__instance).ModGasMixture;
 			__result = gasMixture.GetGasByName("water").Quantity / gasMixture.TotalMolesGassesAndLiquids;
 			return false; // skip original method
 		}

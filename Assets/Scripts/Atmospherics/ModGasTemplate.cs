@@ -37,6 +37,8 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 
         public bool IsFuel { get; set; } = false;
 
+        public bool CanStun { get; set; } = false;
+
         public float TradeValue { get; set; } = 0.1f;
 
         public static readonly ModGasTemplate EmptyModGasTemplate = new ModGasTemplate();
@@ -99,9 +101,39 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
                 return this;
             }
 
+            public Builder LimitingOxygenConcentration(float limitingOxygenConcentration)
+            {
+                modGasTemplate.LimitingOxygenConcentration = limitingOxygenConcentration;
+                return this;
+            }
+
             public Builder Enthalpy(float enthalpy)
             {
                 modGasTemplate.Enthalpy = enthalpy;
+                return this;
+            }
+
+            public Builder IsToxic()
+            {
+                modGasTemplate.IsToxic = true;
+                return this;
+            }
+
+            public Builder IsPollutant()
+            {
+                modGasTemplate.IsPollutant = true;
+                return this;
+            }
+
+            public Builder IsFuel()
+            {
+                modGasTemplate.IsFuel = true;
+                return this;
+            }
+
+            public Builder CanStun()
+            {
+                modGasTemplate.CanStun = true;
                 return this;
             }
 

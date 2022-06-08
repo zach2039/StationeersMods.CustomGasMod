@@ -24,7 +24,7 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 			tooMix.GetGasById(filterType).Add(mole);
 			if (atmosphere.GetAdditionalData().ModGasMixture.GetGasById(filterType).Quantity / atmosphere.TotalMoles < minRatio)
 			{
-				tooMix.GetGasById(filterType).Add(atmosphere.GetAdditionalData().ModGasMixture.RemoveAll(filterType));
+				tooMix.GetGasById(filterType).Add(AtmosphereExtension.GetAdditionalData(atmosphere).ModGasMixture.RemoveAll(filterType));
 			}
 			return quantity;
 		}

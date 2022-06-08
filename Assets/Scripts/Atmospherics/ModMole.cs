@@ -29,6 +29,8 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
             this.ReadOnly = false;
             this.IsCachable = false;
             this.ID = gasTemplate.ID;
+            this.Name = gasTemplate.Name;
+            this.GasSymbol = gasTemplate.GasSymbol;
             this._energy = energy;
             this._energyCached = energy;
             this._quantity = quantity;
@@ -38,6 +40,12 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
             this.LowerFlammableLimit = gasTemplate.LowerFlammableLimit;
             this.UpperFlammableLimit = gasTemplate.UpperFlammableLimit;
             this.LimitingOxygenConcentration = gasTemplate.LimitingOxygenConcentration;
+            this.MatterState = gasTemplate.MatterState;
+            this.IsFuel = gasTemplate.IsFuel;
+            this.IsPollutant = gasTemplate.IsPollutant;
+            this.IsToxic = gasTemplate.IsToxic;
+            this.CanStun = gasTemplate.CanStun;
+            this.TradeValue = gasTemplate.TradeValue;
             this.QuantityDirty = true;
             this.EnergyDirty = true;
             this._lastQuantityDirtied = 0f;
@@ -364,13 +372,15 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
 
         public bool IsFuel { get; set; } = false;
 
+        public bool CanStun { get; set; } = false;
+
         public float TradeValue { get; set; } = 0.1f;
 
         public Atmosphere.MatterState MatterState { get; private set; }
 
         public bool IsValid { get; private set; }
 
-        public static ModMole Invalid { get; }
+        public static ModMole Invalid { get; } = new ModMole(ModChemistry.InvalidTemplate);
 
         public bool IsCachable { set; get; }
 
