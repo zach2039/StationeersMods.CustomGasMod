@@ -3,13 +3,16 @@ using System.Runtime.CompilerServices;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Assets.Scripts.Objects;
 using Assets.Scripts.Atmospherics;
+using Assets.Scripts.Networks;
 using Assets.Scripts.GridSystem;
 using Assets.Scripts.Util;
 using HarmonyLib;
 using Assets.Scripts.Networking;
 using UnityEngine;
 using UnityEngine.Networking;
+using zach2039.CustomGas.Assets.Scripts;
 using zach2039.CustomGas.Assets.Scripts.Atmospherics;
 
 namespace Assets.Scripts.Atmospherics
@@ -17,6 +20,37 @@ namespace Assets.Scripts.Atmospherics
 	[HarmonyPatch(typeof(Atmosphere))]
 	public class Atmosphere_Patch
 	{
+		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
+		public static void Atmosphere_Constructor0_Patch(Atmosphere __instance)
+		{
+			__instance.AddData(__instance.GetAdditionalData());
+			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
+		}
+
+		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
+		[HarmonyPatch(new Type[] { typeof(PipeNetwork), typeof(long) })]
+		public static void Atmosphere_Constructor1_Patch(Atmosphere __instance)
+		{
+			__instance.AddData(__instance.GetAdditionalData());
+			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
+		}
+
+		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
+		[HarmonyPatch(new Type[] { typeof(Thing), typeof(float), typeof(long) })]
+		public static void Atmosphere_Constructor2_Patch(Atmosphere __instance)
+		{
+			__instance.AddData(__instance.GetAdditionalData());
+			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
+		}
+
+		[HarmonyPatch("Atmosphere", MethodType.Constructor)]
+		[HarmonyPatch(new Type[] { typeof(Grid3), typeof(GridController), typeof(long) })]
+		public static void Atmosphere_Constructor3_Patch(Atmosphere __instance)
+		{
+			__instance.AddData(__instance.GetAdditionalData());
+			Debug.Log("[" + CustomGas.MODID + "] Attached additional data to Atmophere instance + " + __instance + ".");
+		}
+
 		[HarmonyPatch("Combust", new Type[] { typeof(Atmosphere.MatterState) })]
 		[HarmonyPrefix]
 		public static bool Combust_Patch(Atmosphere __instance, Atmosphere.MatterState productType, ref bool ____inflamed)
@@ -89,6 +123,10 @@ namespace Assets.Scripts.Atmospherics
 		public static void Init_Patch(Atmosphere __instance)
 		{
 			ModGasMixture gasMixture = __instance.GetAdditionalData().ModGasMixture;
+			if (__instance.GetAdditionalData().ModGasMixture == null)
+			{
+				Debug.LogError("[" + CustomGas.MODID + "] Gas mixture is null in atmosphere " + __instance.DisplayName + ".");
+			}
 			gasMixture.GetGasByName("water").Clear();
 			gasMixture.GetGasByName("water").ReadOnly = true;
 		}

@@ -45,54 +45,64 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
         {
             private ModGasTemplate modGasTemplate = new ModGasTemplate();
 
-            public void ID(int iD)
+            public Builder ID(int iD)
             {
                 modGasTemplate.ID = iD;
+                return this;
             }
 
-            public void Name(string name)
+            public Builder Name(string name)
             {
                 modGasTemplate.Name = name;
+                return this;
             }
 
-            public void GasSymbol(string gasSymbol)
+            public Builder GasSymbol(string gasSymbol)
             {
                 modGasTemplate.GasSymbol = gasSymbol;
+                return this;
             }
 
-            public void MatterState(Atmosphere.MatterState matterState)
+            public Builder MatterState(Atmosphere.MatterState matterState)
             {
                 modGasTemplate.MatterState = matterState;
+                return this;
             }
 
-            public void SpecificHeat(float specificHeat)
+            public Builder SpecificHeat(float specificHeat)
             {
                 modGasTemplate.SpecificHeat = specificHeat;
+                return this;
             }
 
-            public void HeatCapacityRatio(float heatCapacityRatio)
+            public Builder HeatCapacityRatio(float heatCapacityRatio)
             {
                 modGasTemplate.HeatCapacityRatio = heatCapacityRatio;
+                return this;
             }
 
-            public void ThermalEfficiency(float thermalEfficiency)
+            public Builder ThermalEfficiency(float thermalEfficiency)
             {
                 modGasTemplate.ThermalEfficiency = thermalEfficiency;
+                return this;
             }
 
-            public void LowerFlammableLimit(float lowerFlammableLimit)
+            public Builder LowerFlammableLimit(float lowerFlammableLimit)
             {
                 modGasTemplate.LowerFlammableLimit = lowerFlammableLimit;
+                return this;
             }
 
-            public void UpperFlammableLimit(float upperFlammableLimit)
+            public Builder UpperFlammableLimit(float upperFlammableLimit)
             {
                 modGasTemplate.UpperFlammableLimit = upperFlammableLimit;
+                return this;
             }
 
-            public void Enthalpy(float enthalpy)
+            public Builder Enthalpy(float enthalpy)
             {
                 modGasTemplate.Enthalpy = enthalpy;
+                return this;
             }
 
             public ModGasTemplate Build()

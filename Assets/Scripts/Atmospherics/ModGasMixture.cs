@@ -25,6 +25,7 @@ namespace zach2039.CustomGas.Assets.Scripts.Atmospherics
             foreach (ModGasTemplate modGasTemplate in ModChemistry.GasTemplates)
             {
                 this.ContainedGases.Add(modGasTemplate.ID, new ModMole(modGasTemplate, 0f, 0f));
+                Debug.Log("[" + CustomGas.MODID + "] Added gas " + modGasTemplate.Name + " (ID:" + modGasTemplate.ID + ") to new gas mixture.");
             }
         }
 
